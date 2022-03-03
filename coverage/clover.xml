@@ -1,36 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646327775616" clover="3.2.0">
-  <project timestamp="1646327775616" name="All files">
-    <metrics statements="18" coveredstatements="18" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4" elements="25" coveredelements="25" complexity="0" loc="18" ncloc="18" packages="1" files="4" classes="4"/>
-    <file name="AuthenticationError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\AuthenticationError.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="5" count="1" type="stmt"/>
-      <line num="6" count="1" type="stmt"/>
-      <line num="10" count="1" type="stmt"/>
-    </file>
-    <file name="ClientError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\ClientError.js">
-      <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <line num="3" count="4" type="stmt"/>
-      <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
-      <line num="6" count="1" type="stmt"/>
-      <line num="9" count="3" type="stmt"/>
-      <line num="10" count="3" type="stmt"/>
-      <line num="14" count="4" type="stmt"/>
-    </file>
-    <file name="InvariantError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\InvariantError.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="5" count="1" type="stmt"/>
-      <line num="6" count="1" type="stmt"/>
-      <line num="10" count="1" type="stmt"/>
-    </file>
-    <file name="NotFoundError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\NotFoundError.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="5" count="1" type="stmt"/>
-      <line num="6" count="1" type="stmt"/>
-      <line num="10" count="1" type="stmt"/>
-    </file>
+<coverage generated="1646333585312" clover="3.2.0">
+  <project timestamp="1646333585312" name="All files">
+    <metrics statements="77" coveredstatements="77" conditionals="30" coveredconditionals="30" methods="18" coveredmethods="18" elements="125" coveredelements="125" complexity="0" loc="77" ncloc="77" packages="7" files="11" classes="11"/>
+    <package name="Applications.security">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="PasswordHash.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Applications\security\PasswordHash.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="Applications.use_case">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="AddUserCase.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Applications\use_case\AddUserCase.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Commons.exceptions">
+      <metrics statements="18" coveredstatements="18" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+      <file name="AuthenticationError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\AuthenticationError.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="ClientError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\ClientError.js">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="5" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+      </file>
+      <file name="InvariantError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\InvariantError.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+      </file>
+      <file name="NotFoundError.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Commons\exceptions\NotFoundError.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Domains.users">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="UserRepository.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Domains\users\UserRepository.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="Domains.users.entities">
+      <metrics statements="24" coveredstatements="24" conditionals="24" coveredconditionals="24" methods="4" coveredmethods="4"/>
+      <file name="RegisterUser.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Domains\users\entities\RegisterUser.js">
+        <metrics statements="14" coveredstatements="14" conditionals="14" coveredconditionals="14" methods="2" coveredmethods="2"/>
+        <line num="3" count="9" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="13" count="9" type="cond" truecount="5" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="8" type="cond" truecount="5" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+      </file>
+      <file name="RegisteredUser.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Domains\users\entities\RegisteredUser.js">
+        <metrics statements="10" coveredstatements="10" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2"/>
+        <line num="3" count="7" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="13" count="7" type="cond" truecount="5" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="5" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="Infrastructures.repository">
+      <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <file name="UserRepositoryPostgres.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Infrastructures\repository\UserRepositoryPostgres.js">
+        <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Infrastructures.security">
+      <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="BcryptPasswordHash.js" path="D:\Hakaman\Dicoding\clean-architecture\src\Infrastructures\security\BcryptPasswordHash.js">
+        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
