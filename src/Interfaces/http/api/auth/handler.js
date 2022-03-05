@@ -11,7 +11,6 @@ class AuthHandler {
     }
 
     async postAuthHandler(request, h){
-        console.log(request)
         const loginUserUseCase = this._container.getInstance(LoginUserUseCase.name)
         const { accessToken, refreshToken } = await loginUserUseCase.execute(request.payload)
         const response = h.response({
