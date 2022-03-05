@@ -41,7 +41,7 @@ describe('GetAuthenticationUseCase', () => {
             userRepository: mockUserRepository,
             authRepository: mockAuthRepository,
             authTokenManager: mockAuthTokenManager,
-            passwordHash: mockPasswordHash
+            passwordHash: mockPasswordHash,
         })
 
         // Action
@@ -49,7 +49,7 @@ describe('GetAuthenticationUseCase', () => {
 
         // Assert
         expect(actualAuth).toEqual(expectedAuthentication)
-        expect(mockAuthRepository.getPasswordByUsername).toBeCalledWith('hakaman')
+        expect(mockUserRepository.getPasswordByUsername).toBeCalledWith('hakaman')
         expect(mockPasswordHash.comparePassword).toBeCalledWith('secret', 'encrypted_password')
         expect(mockUserRepository.getIdByUsername).toBeCalledWith('hakaman')
         expect(mockAuthTokenManager.createAccessToken).toBeCalledWith({username: 'hakaman', id: 'user-123'})
