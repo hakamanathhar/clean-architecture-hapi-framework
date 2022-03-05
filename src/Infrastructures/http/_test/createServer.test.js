@@ -28,9 +28,9 @@ describe('HTTP server', () => {
     it('should response 201 and persisted user', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding',
+        username: 'hakaman',
         password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Hakaman Forever',
       };
       const server = await createServer(container);
  
@@ -51,7 +51,7 @@ describe('HTTP server', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
       const requestPayload = {
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Hakaman Forever',
         password: 'secret',
       };
       const server = await createServer(container);
@@ -70,9 +70,9 @@ describe('HTTP server', () => {
     it('should response 400 when request payload not meet data type specification', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding',
+        username: 'hakaman',
         password: 'secret',
-        fullname: ['Dicoding Indonesia'],
+        fullname: ['Hakaman Forever'],
       };
       const server = await createServer(container);
       // Action
@@ -90,9 +90,9 @@ describe('HTTP server', () => {
     it('should response 400 when username more than 50 character', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicodingindonesiadicodingindonesiadicodingindonesiadicoding',
+        username: 'hakamanindonesiahakamanindonesiahakamanindonesiahakaman',
         password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Hakaman Forever',
       };
       const server = await createServer(container);
       // Action
@@ -110,9 +110,9 @@ describe('HTTP server', () => {
     it('should response 400 when username contain restricted character', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding indonesia',
+        username: 'hakaman indonesia',
         password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Hakaman Forever',
       };
       const server = await createServer(container);
       // Action
@@ -129,10 +129,10 @@ describe('HTTP server', () => {
     });
     it('should response 400 when username unavailable', async () => {
       // Arrange
-      await UsersTableTestHelper.addUser({ username: 'dicoding' });
+      await UsersTableTestHelper.addUser({ username: 'hakaman' });
       const requestPayload = {
-        username: 'dicoding',
-        fullname: 'Dicoding Indonesia',
+        username: 'hakaman',
+        fullname: 'Hakaman Forever',
         password: 'super_secret',
       };
       const server = await createServer(container);
@@ -152,8 +152,8 @@ describe('HTTP server', () => {
   it('should handle server error correctly', async () => {
     // Arrange
     const requestPayload = {
-      username: 'dicoding',
-      fullname: 'Dicoding Indonesia',
+      username: 'hakaman',
+      fullname: 'Hakaman Forever',
       password: 'super_secret',
     };
     const server = await createServer({}); // fake container
