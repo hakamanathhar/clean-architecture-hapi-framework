@@ -13,7 +13,7 @@ class RefreshAuthUseCase {
         await this._authTokenManager.verifyRefreshToken(refreshToken)
         await this._authRepository.checkAvailabilityToken(refreshToken)
 
-        const { username, id } = await this._authTokenManager.decodedPayload(refreshToken)
+        const { username, id } = await this._authTokenManager.decodePayload(refreshToken)
         return this._authTokenManager.createAccessToken({ username, id })
     }
 

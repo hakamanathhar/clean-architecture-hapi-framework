@@ -1,5 +1,6 @@
 const LoginUserUseCase = require("../../../../Applications/use_case/authentication/LoginUserUseCase")
 const LogoutUserUseCase = require("../../../../Applications/use_case/authentication/LogoutUserUseCase")
+const RefreshAuthUseCase = require("../../../../Applications/use_case/authentication/RefreshAuthUseCase")
 
 class AuthHandler {
     constructor(container){
