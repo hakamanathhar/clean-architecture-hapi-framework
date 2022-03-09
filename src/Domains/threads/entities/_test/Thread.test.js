@@ -1,4 +1,4 @@
-const AddThread = require("../AddThread");
+const Thread = require("../Thread");
 
 
 describe('a AddedThread entities', () => {
@@ -12,7 +12,7 @@ describe('a AddedThread entities', () => {
     };
 
     // Action and Assert
-    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+    expect(() => new Thread(payload)).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
   it('should throw error when payload did not meet data type specification', () => {
@@ -25,7 +25,7 @@ describe('a AddedThread entities', () => {
     };
 
     // Action and Assert
-    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    expect(() => new Thread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
 
@@ -34,6 +34,7 @@ describe('a AddedThread entities', () => {
     const dateFormat = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     const dateTime = `${dateFormat} ${time}`;
+    
 
     // Arrange
     const payload = {
@@ -49,7 +50,7 @@ describe('a AddedThread entities', () => {
         images, 
         createdBy,
         createdAt, 
-    } = new AddThread(payload);
+    } = new Thread(payload);
 
     // Assert
     expect(content).toEqual(payload.content);
