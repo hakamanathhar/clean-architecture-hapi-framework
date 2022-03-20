@@ -1,8 +1,8 @@
-const AddComment = require("../../../../Domains/comments/entities/AddComment")
-const CommentRepository = require("../../../../Domains/comments/CommentRepository")
-const AuthTokenManager = require("../../../security/AuthTokenManager")
+const AddComment = require("../../../../../Domains/comments/entities/AddComment")
+const CommentRepository = require("../../../../../Domains/comments/CommentRepository")
+const AuthTokenManager = require("../../../../security/AuthTokenManager")
 const AddCommentUseCase = require("../AddCommentUseCase")
-const ThreadRepository = require("../../../../Domains/threads/ThreadRepository")
+const ThreadRepository = require("../../../../../Domains/threads/ThreadRepository")
 
  describe('AddCommentUseCase', () => {
     it('should throw error if use case payload not contain access token', async () => {

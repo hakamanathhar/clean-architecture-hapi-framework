@@ -1,4 +1,5 @@
-const AddCommentUseCase = require('../../../../Applications/use_case/comments/AddCommentUseCase');
+const AddCommentUseCase = require("../../../../../Applications/use_case/threads/comments/AddCommentUseCase");
+
  
 class CommentsHandler {
   constructor(container) {
