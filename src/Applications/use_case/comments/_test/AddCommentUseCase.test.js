@@ -2,6 +2,7 @@ const AddComment = require("../../../../Domains/comments/entities/AddComment")
 const CommentRepository = require("../../../../Domains/comments/CommentRepository")
 const AuthTokenManager = require("../../../security/AuthTokenManager")
 const AddCommentUseCase = require("../AddCommentUseCase")
+const ThreadRepository = require("../../../../Domains/threads/ThreadRepository")
 
  describe('AddCommentUseCase', () => {
     it('should throw error if use case payload not contain access token', async () => {
@@ -49,9 +50,11 @@ const AddCommentUseCase = require("../AddCommentUseCase")
         const useCasePayload = {
            payload: {
                 content: 'Keren',
-                threadId: 'thread-123',
                 owner: 'user-123',
                 username: 'hakaman',
+           },
+           params: {
+                threadId: 'thread-123',
            },
            headers: {
                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhha2FtYW4iLCJpZCI6InVzZXItWThnUlI2cGM4am9rWlR1RTN2Q0NfIiwiaWF0IjoxNjQ3NDAzOTkxfQ.gt_1RfElpdQgE_eRjbRrFt-EQxxbb-19sQKxGtU9o40'
@@ -67,10 +70,13 @@ const AddCommentUseCase = require("../AddCommentUseCase")
         /** creating dependency of use case */
         const mockCommentRepository = new CommentRepository()
         const mockAuthTokenManager = new AuthTokenManager()
+        const mockThreadRepository = new ThreadRepository()
     
         /** mocking needed function */
         mockCommentRepository.addComment = jest.fn()
         .mockImplementation(() => Promise.resolve(expectedComment))
+        mockThreadRepository.findThreadsByIdExist = jest.fn()
+        .mockImplementation(() => Promise.resolve(useCasePayload.payload.threadId))
         mockAuthTokenManager.verifyAccessToken = jest.fn()
         .mockImplementation(() => Promise.resolve(useCasePayload.headers.authorization))
         mockAuthTokenManager.decodePayload = jest.fn()
@@ -80,6 +86,7 @@ const AddCommentUseCase = require("../AddCommentUseCase")
         const getCommentUseCase = new AddCommentUseCase({
             commentRepository: mockCommentRepository,
             authTokenManager: mockAuthTokenManager,
+            threadRepository: mockThreadRepository,
         })
     
         // Action

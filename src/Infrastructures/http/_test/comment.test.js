@@ -4,6 +4,7 @@ const createServer = require('../createServer');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
 const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
+const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 
 
 const addUser = async ()=>{
@@ -40,6 +41,18 @@ authLogin = async()=>{
     return responseAuth
 }
 
+addThreadData = async() => {
+  const data = {
+    id: '123',
+    title: 'AddThread Test',
+    body: 'Lorem Ipsum is simply',
+    owner: 'user-kIb7RsEyKODmRoFT22FSR',
+    username: 'hakaman',
+  }
+  await ThreadsTableTestHelper.addThread(data)
+  return data
+}
+
 describe('/comment endpoint', () => {
   afterAll(async () => {
     await pool.end();
@@ -47,6 +60,7 @@ describe('/comment endpoint', () => {
 
   afterEach(async () => {
     await UsersTableTestHelper.cleanTable();
+    await ThreadsTableTestHelper.cleanTable();
     await AuthenticationsTableTestHelper.cleanTable();
     await CommentsTableTestHelper.cleanTable();
   });
@@ -54,16 +68,17 @@ describe('/comment endpoint', () => {
   describe('when POST /comments', () => {
     it('should response 201 and persisted user', async () => {
         const responseAuth = await authLogin()
-
+        const responseThread = await addThreadData()
+        const threadId = responseThread.id
         const requestPayloadComment = {
             content: 'Keren',
-            threadId: 'thread-123',
+            threadId: threadId
         };      
         const server = await createServer(container);
         // Action
         const response = await server.inject({
             method: 'POST',
-            url: '/comments',
+            url: `/threads/${threadId}/comments`,
             payload: requestPayloadComment,
             headers: {
                 authorization: responseAuth.result.data.accessToken
@@ -80,15 +95,16 @@ describe('/comment endpoint', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
       const responseAuth = await authLogin()
+      const responseThread = await addThreadData()
       const requestPayload = {
-        content: 'Keren',
       };
+      const threadId = responseThread.id
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
         method: 'POST',
-        url: '/comments',
+        url: `/threads/${threadId}/comments`,
         payload: requestPayload,
         headers: {
             authorization: responseAuth.result.data.accessToken
@@ -105,16 +121,18 @@ describe('/comment endpoint', () => {
     it('should response 400 when request payload not meet data type specification', async () => {
       // Arrange
       const responseAuth = await authLogin()
+      const responseThread = await addThreadData()
+      const threadId = responseThread.id
       const requestPayload = {
-        content: 'Keren',
-        threadId: 123,
+        content: true,
+        threadId: threadId
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
         method: 'POST',
-        url: '/comments',
+        url: `/threads/${threadId}/comments`,
         payload: requestPayload,
         headers: {
             authorization: responseAuth.result.data.accessToken

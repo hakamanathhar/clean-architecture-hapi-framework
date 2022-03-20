@@ -2,9 +2,10 @@ const AddComment = require("../../../Domains/comments/entities/AddComment")
 
 class AddCommentUseCase {
 
-  constructor({ commentRepository, authTokenManager }) {
+  constructor({ commentRepository, authTokenManager, threadRepository}) {
     this._commentRepository = commentRepository
     this._authTokenManager = authTokenManager
+    this._threadRepository = threadRepository
   }
  
   async execute(useCasePayload) {
@@ -12,8 +13,10 @@ class AddCommentUseCase {
     const { authorization } = useCasePayload.headers
     await this._authTokenManager.verifyAccessToken(authorization)
     const { id, username } = await this._authTokenManager.decodePayload(authorization)
+    await this._threadRepository.findThreadsByIdExist(useCasePayload.params.threadId)
     const comment = new AddComment({
       ...useCasePayload.payload,
+      ...useCasePayload.params,
       owner: id || '-',
       username: username || '-',
     })

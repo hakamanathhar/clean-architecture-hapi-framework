@@ -3,6 +3,7 @@ const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper
 const AddThread = require('../../../Domains/threads/entities/AddThread');
 const ThreadRepositoryPostgres = require('../ThreadRepositoryPostgres');
 const AddedThread = require('../../../Domains/threads/entities/AddedThread');
+const InvariantError = require('../../../Commons/exceptions/InvariantError');
  
 describe('ThreadRepositoryPostgres', () => {
   afterEach(async () => {
@@ -57,6 +58,32 @@ describe('ThreadRepositoryPostgres', () => {
         username: thread.username,
         date: new Date().toDateString()
       }));
+    });
+  });
+
+ 
+  describe('findThreadsByIdExist function', () => {
+    it('should return thread not exist', async () => {
+      // Arrange
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+      
+      // Action & Assert
+      await expect(threadRepositoryPostgres.findThreadsByIdExist('123')).rejects.toThrowError(InvariantError);
+    });
+ 
+    it('should return thread exist', async () => {
+      // Arrange
+      await ThreadsTableTestHelper.addThread({
+        id: '123',
+        title: 'AddThread Test',
+        body: 'Lorem Ipsum is simply',
+        owner: 'user-kIb7RsEyKODmRoFT22FSR',
+        username: 'hakaman',
+      })
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+      
+      // Action &Assert
+      expect(threadRepositoryPostgres.findThreadsByIdExist('123')).resolves.not.toThrowError(InvariantError);;
     });
   });
 });

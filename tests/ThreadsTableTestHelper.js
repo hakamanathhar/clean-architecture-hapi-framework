@@ -15,7 +15,7 @@ const ThreadsTableTestHelper = {
       values: [id, title, body, owner, username],
     }
  
-    await this.pool.query(query)
+    await pool.query(query)
   },
   async findThreadsById(id) {
     const query = {
