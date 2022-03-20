@@ -8,7 +8,6 @@ class ThreadsHandler {
   }
  
   async postThreadHandler(request, h) {
-    // try {
       const addThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
       const addedThread = await addThreadUseCase.execute(request);
       const response = h.response({
@@ -19,9 +18,6 @@ class ThreadsHandler {
       });
       response.code(201);
       return response;
-    // } catch (error) {
-    //   console.log(error)
-    // }
   }
 }
  

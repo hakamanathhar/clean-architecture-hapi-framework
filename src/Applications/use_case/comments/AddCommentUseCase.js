@@ -1,9 +1,9 @@
-const AddThread = require("../../../Domains/threads/entities/AddThread")
+const AddComment = require("../../../Domains/comments/entities/AddComment")
 
-class AddThreadUseCase {
+class AddCommentUseCase {
 
-  constructor({ threadRepository, authTokenManager }) {
-    this._threadRepository = threadRepository
+  constructor({ commentRepository, authTokenManager }) {
+    this._commentRepository = commentRepository
     this._authTokenManager = authTokenManager
   }
  
@@ -12,25 +12,25 @@ class AddThreadUseCase {
     const { authorization } = useCasePayload.headers
     await this._authTokenManager.verifyAccessToken(authorization)
     const { id, username } = await this._authTokenManager.decodePayload(authorization)
-    const thread = new AddThread({
+    const comment = new AddComment({
       ...useCasePayload.payload,
       owner: id || '-',
       username: username || '-',
     })
-    return this._threadRepository.addThread(thread)
+    return this._commentRepository.addComment(comment)
   }
 
   _verifyPayload(payload){
     const { authorization } = payload.headers
 
     if(!authorization){
-        throw new Error('ADD_THREAD_USE_CASE.NOT_CONTAIN_TOKEN')
+        throw new Error('ADD_COMMENT_USE_CASE.NOT_CONTAIN_TOKEN')
     }
 
     if(typeof authorization !== 'string'){
-        throw new Error('ADD_THREAD_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATIONS')
+        throw new Error('ADD_COMMENT_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATIONS')
     }
 }
 }
 
-module.exports = AddThreadUseCase
+module.exports = AddCommentUseCase

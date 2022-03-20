@@ -20,7 +20,7 @@ const AddThreadUseCase = require("../AddThreadUseCase")
         // Action & Assert
         await expect(getThreadUseCase.execute(useCasePayload))
         .rejects
-        .toThrowError('ADD_THREAD_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN')
+        .toThrowError('ADD_THREAD_USE_CASE.NOT_CONTAIN_TOKEN')
     })
 
     it('should throw error if access token not string', async () => {

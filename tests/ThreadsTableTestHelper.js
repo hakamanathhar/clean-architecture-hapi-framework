@@ -5,13 +5,14 @@ const ThreadsTableTestHelper = {
 
   async addThread({
     id = 'thread-123',
-    content = 'Lorem Ipsum is simply dummy text',
-    images = 'images1.jpg',
-    createdBy = 'user-kIb7RsEyKODmRoFT22FSR',
+    title = 'AddThread Test',
+    body = 'Lorem Ipsum',
+    owner = 'user-kIb7RsEyKODmRoFT22FSR',
+    username = 'hakaman',
   }) {
     const query = {
-      text: 'INSERT INTO threads VALUES($1, $2, $3, $4)',
-      values: [id, content, images, createdBy],
+      text: 'INSERT INTO threads (id, title, body, owner, username) VALUES($1, $2, $3, $4, $5)',
+      values: [id, title, body, owner, username],
     }
  
     await this.pool.query(query)

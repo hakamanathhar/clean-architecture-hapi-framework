@@ -13,21 +13,12 @@ exports.up = (pgm) => {
         type: 'TEXT',
         notNull: true,
       },
-      threadId: {
+      thread_id: {
         type: 'VARCHAR(50)',
         notNull: true,
         foreignKeys: {
             columns: 'id',
             references: 'threads',
-            onDelete: 'restrict',
-        } 
-      },
-      commentId: {
-        type: 'VARCHAR(50)',
-        notNull: true,
-        foreignKeys: {
-            columns: 'id',
-            references: 'comments',
             onDelete: 'restrict',
         } 
       },
@@ -47,7 +38,6 @@ exports.up = (pgm) => {
       username: {
         type: 'VARCHAR(50)',
         notNull: true,
-        unique: true,
       },
     });
   };
