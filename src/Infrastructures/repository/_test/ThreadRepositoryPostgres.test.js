@@ -1,125 +1,62 @@
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const InvariantError = require('../../../Commons/exceptions/InvariantError');
-const RegisterUser = require('../../../Domains/users/entities/RegisterUser');
-const RegisteredUser = require('../../../Domains/users/entities/RegisteredUser');
 const pool = require('../../database/postgres/pool');
-const UserRepositoryPostgres = require('../UserRepositoryPostgres');
+const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
+const AddThread = require('../../../Domains/threads/entities/AddThread');
+const ThreadRepositoryPostgres = require('../ThreadRepositoryPostgres');
+const AddedThread = require('../../../Domains/threads/entities/AddedThread');
  
-describe('UserRepositoryPostgres', () => {
+describe('ThreadRepositoryPostgres', () => {
   afterEach(async () => {
-    await UsersTableTestHelper.cleanTable();
+    await ThreadsTableTestHelper.cleanTable();
   });
  
   afterAll(async () => {
     await pool.end();
   });
+
  
-  describe('verifyAvailableUsername function', () => {
-    it('should throw InvariantError when username not available', async () => {
-      // Arrange
-      await UsersTableTestHelper.addUser({ username: 'hakaman' }); // memasukan user baru dengan username hakaman
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
- 
-      // Action & Assert
-      await expect(userRepositoryPostgres.verifyAvailableUsername('hakaman')).rejects.toThrowError(InvariantError);
-    });
- 
-    it('should not throw InvariantError when username available', async () => {
-      // Arrange
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
- 
-      // Action & Assert
-      await expect(userRepositoryPostgres.verifyAvailableUsername('hakaman')).resolves.not.toThrowError(InvariantError);
-    });
-  });
- 
-  describe('addUser function', () => {
+  describe('addThread function', () => {
     it('should persist register user', async () => {
       // Arrange
-      const registerUser = new RegisterUser({
+      const thread = new AddThread({
+        title: 'AddThread Test',
+        body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        owner: 'user-kIb7RsEyKODmRoFT22FSR',
         username: 'hakaman',
-        password: 'secret_password',
-        fullname: 'Hakaman Forever',
       });
       const fakeIdGenerator = () => '123'; // stub!
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, fakeIdGenerator);
  
       // Action
-      await userRepositoryPostgres.addUser(registerUser);
+      await threadRepositoryPostgres.addThread(thread);
  
       // Assert
-      const users = await UsersTableTestHelper.findUsersById('user-123');
-      expect(users).toHaveLength(1);
+      const threads = await ThreadsTableTestHelper.findThreadsById('thread-123');
+      expect(threads).toHaveLength(1);
     });
  
-    it('should return registered user correctly', async () => {
+    it('should return added thread correctly', async () => {
       // Arrange
-      const registerUser = new RegisterUser({
+      const thread = new AddThread({
+        title: 'AddThread Test',
+        body: 'Lorem Ipsum is simply',
+        owner: 'user-kIb7RsEyKODmRoFT22FSR',
         username: 'hakaman',
-        password: 'secret_password',
-        fullname: 'Hakaman Forever',
       });
       const fakeIdGenerator = () => '123'; // stub!
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, fakeIdGenerator);
  
       // Action
-      const registeredUser = await userRepositoryPostgres.addUser(registerUser);
+      const threads = await threadRepositoryPostgres.addThread(thread);
  
       // Assert
-      expect(registeredUser).toStrictEqual(new RegisteredUser({
-        id: 'user-123',
-        username: 'hakaman',
-        fullname: 'Hakaman Forever',
+      expect(threads).toStrictEqual(new AddedThread({
+        id: 'thread-123',
+        title: thread.title,
+        body: thread.body,
+        owner: thread.owner,
+        username: thread.username,
+        date: new Date().toDateString()
       }));
-    });
-  });
-
-  describe('getPasswordByUsername', () => {
-    it('should throw InvariantError when user not found', () => {
-      // Arrange
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
-
-      // Action & Assert
-      return expect(userRepositoryPostgres.getPasswordByUsername('hakaman'))
-        .rejects
-        .toThrowError(InvariantError);
-    });
-
-    it('should return username password when user is found', async () => {
-      // Arrange
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
-      await UsersTableTestHelper.addUser({
-        username: 'hakaman',
-        password: 'secret_password',
-      });
-
-      // Action & Assert
-      const password = await userRepositoryPostgres.getPasswordByUsername('hakaman');
-      expect(password).toBe('secret_password');
-    });
-  });
-
-  describe('getIdByUsername', () => {
-    it('should throw InvariantError when user not found', async () => {
-      // Arrange
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
-
-      // Action & Assert
-      await expect(userRepositoryPostgres.getIdByUsername('hakaman'))
-        .rejects
-        .toThrowError(InvariantError);
-    });
-
-    it('should return user id correctly', async () => {
-      // Arrange
-      await UsersTableTestHelper.addUser({ id: 'user-321', username: 'hakaman' });
-      const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
-
-      // Action
-      const userId = await userRepositoryPostgres.getIdByUsername('hakaman');
-
-      // Assert
-      expect(userId).toEqual('user-321');
     });
   });
 });

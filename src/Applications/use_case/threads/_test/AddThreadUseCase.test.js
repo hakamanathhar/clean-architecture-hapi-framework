@@ -1,4 +1,4 @@
-const Thread = require("../../../../Domains/threads/entities/Thread")
+const AddThread = require("../../../../Domains/threads/entities/AddThread")
 const ThreadRepository = require("../../../../Domains/threads/ThreadRepository")
 const AuthTokenManager = require("../../../security/AuthTokenManager")
 const AddThreadUseCase = require("../AddThreadUseCase")
@@ -8,7 +8,7 @@ const AddThreadUseCase = require("../AddThreadUseCase")
         // Arrange
         const useCasePayload = {
             payload: {
-                title: 'Thread Pertama',
+                title: 'AddThread Pertama',
                 body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
                 owner: 'user-123',
                 username: 'hakaman',
@@ -27,7 +27,7 @@ const AddThreadUseCase = require("../AddThreadUseCase")
         // Arrange
         const useCasePayload = {
             payload: {
-                title: 'Thread Pertama',
+                title: 'AddThread Pertama',
                 body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
                 owner: 'user-123',
                 username: 'hakaman',
@@ -48,14 +48,14 @@ const AddThreadUseCase = require("../AddThreadUseCase")
         // Arrange
         const useCasePayload = {
            payload: {
-                title: 'Thread Pertama',
+                title: 'AddThread Pertama',
                 body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
            },
            headers: {
                authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhha2FtYW4iLCJpZCI6InVzZXItWThnUlI2cGM4am9rWlR1RTN2Q0NfIiwiaWF0IjoxNjQ3NDAzOTkxfQ.gt_1RfElpdQgE_eRjbRrFt-EQxxbb-19sQKxGtU9o40'
            },
         }
-        const expectedThread = new Thread({
+        const expectedThread = new AddThread({
             title: useCasePayload.payload.title,
             body: useCasePayload.payload.body,
             owner: 'user-123',
@@ -86,7 +86,7 @@ const AddThreadUseCase = require("../AddThreadUseCase")
         // Assert
         // expect(thread).toStrictEqual(expectedThread)
         // expect(mockAuthTokenManager.verifyRefreshToken).toBeCalledWith(useCasePayload.headers.authorization)
-        // expect(mockThreadRepository.addThread).toBeCalledWith(new Thread({
+        // expect(mockThreadRepository.addThread).toBeCalledWith(new AddThread({
         //     title: useCasePayload.payload.title,
         //     body: useCasePayload.payload.body,
         //     owner: useCasePayload.payload.owner,

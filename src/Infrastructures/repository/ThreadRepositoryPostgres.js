@@ -1,4 +1,4 @@
-const Thread = require('../../Domains/threads/entities/Thread');
+const AddedThread = require('../../Domains/threads/entities/AddedThread');
 const ThreadRepository = require('../../Domains/threads/ThreadRepository');
  
 class ThreadRepositoryPostgres extends ThreadRepository {
@@ -21,12 +21,13 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     const result = await this._pool.query(query);
     const data = result.rows[0]
     
-    return new Thread({ 
+    return new AddedThread({ 
+      id: data.id,
       title: data.title,
       body: data.body,
       owner: data.owner,
-      date: new Date(data.date).toDateString(),
       username: data.username,
+      date: new Date(data.date).toDateString(),
     });
   }
 }

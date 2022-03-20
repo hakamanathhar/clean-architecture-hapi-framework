@@ -7,7 +7,6 @@ exports.up = (pgm) => {
       },
       title: {
         type: 'TEXT',
-        primaryKey: true,
       },
       body: {
         type: 'TEXT',

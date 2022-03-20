@@ -14,10 +14,19 @@ const ThreadsTableTestHelper = {
       values: [id, content, images, createdBy],
     }
  
-    return await this.pool.query(query)
+    await this.pool.query(query)
+  },
+  async findThreadsById(id) {
+    const query = {
+      text: 'SELECT * FROM threads WHERE id = $1',
+      values: [id],
+    };
+ 
+    const result = await pool.query(query);
+    return result.rows;
   },
   async cleanTable() {
-    await pool.query('TRUNCATE TABLE users');
+    await pool.query('TRUNCATE TABLE threads');
   },
 }
  

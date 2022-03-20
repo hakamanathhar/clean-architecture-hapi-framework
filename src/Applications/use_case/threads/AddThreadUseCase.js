@@ -1,4 +1,4 @@
-const Thread = require("../../../Domains/threads/entities/Thread")
+const AddThread = require("../../../Domains/threads/entities/AddThread")
 
 class AddThreadUseCase {
 
@@ -12,7 +12,7 @@ class AddThreadUseCase {
     const { authorization } = useCasePayload.headers
     await this._authTokenManager.verifyAccessToken(authorization)
     const { id, username } = await this._authTokenManager.decodePayload(authorization)
-    const thread = new Thread({
+    const thread = new AddThread({
       ...useCasePayload.payload,
       owner: id || '1',
       username: username || '2',
