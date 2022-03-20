@@ -1,30 +1,37 @@
-const Thread = require("../../../Domains/threads/entities/Thread");
+const Thread = require("../../../Domains/threads/entities/Thread")
 
 class AddThreadUseCase {
 
   constructor({ threadRepository, authTokenManager }) {
-    this._threadRepository = threadRepository;
-    this._authTokenManager = authTokenManager;
+    this._threadRepository = threadRepository
+    this._authTokenManager = authTokenManager
   }
  
   async execute(useCasePayload) {
-    this._verifyPayload(useCasePayload)
-    const { refreshToken } = useCasePayload
-    const thread = new Thread(useCasePayload);
-    await this._authTokenManager.verifyRefreshToken(refreshToken);
-    return this._threadRepository.addThread(thread);
+    useCasePayload = this._verifyPayload(useCasePayload)
+    const { authorization } = useCasePayload.headers
+    await this._authTokenManager.verifyAccessToken(authorization)
+    const { id, username } = await this._authTokenManager.decodePayload(authorization)
+    const thread = new Thread({
+      ...useCasePayload.payload,
+      owner: id || '1',
+      username: username || '2',
+    })
+    return this._threadRepository.addThread(thread)
   }
 
   _verifyPayload(payload){
-    const { refreshToken } = payload
-    if(!refreshToken){
+    const { authorization } = payload.headers
+
+    if(!authorization){
         throw new Error('ADD_THREAD_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN')
     }
 
-    console.log('hakaman',typeof refreshToken)
-    if(typeof refreshToken !== 'string'){
+    if(typeof authorization !== 'string'){
         throw new Error('ADD_THREAD_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATIONS')
     }
+
+    return payload
 }
 }
 

@@ -48,26 +48,76 @@ describe('JwtTokenManager', () => {
     describe('verifyRefreshToken function', () => {
         it('should throw InvariantError when verification failed', async () => {
             // Arrange
-            const jwtTokenManager = new JwtTokenManager(Jwt.token);
-            const accessToken = await jwtTokenManager.createAccessToken({ username: 'hakaman' });
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const accessToken = await jwtTokenManager.createAccessToken({ username: 'hakaman' })
 
             // Action & Assert
             await expect(jwtTokenManager.verifyRefreshToken(accessToken))
                 .rejects
-                .toThrow(InvariantError);
+                .toThrow(InvariantError)
 
         })
 
         it('should not throw InvariantError when refresh token verified', async () => {
             // Arrange
-            const jwtTokenManager = new JwtTokenManager(Jwt.token);
-            const refreshToken = await jwtTokenManager.createRefreshToken({ username: 'hakaman' });
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const refreshToken = await jwtTokenManager.createRefreshToken({ username: 'hakaman' })
       
             // Action & Assert
             await expect(jwtTokenManager.verifyRefreshToken(refreshToken))
               .resolves
-              .not.toThrow(InvariantError);
-          });
+              .not.toThrow(InvariantError)
+        })
+
+    })
+
+    describe('verifyAccessToken function', () => {
+        it('should throw InvariantError when verification failed', async () => {
+            // Arrange
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const accessToken = await jwtTokenManager.createAccessToken({ username: 'hakaman' })
+
+            // Action & Assert
+            await expect(jwtTokenManager.verifyRefreshToken(accessToken))
+                .rejects
+                .toThrow(InvariantError)
+
+        })
+
+        it('should not throw InvariantError when refresh token verified', async () => {
+            // Arrange
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const refreshToken = await jwtTokenManager.createRefreshToken({ username: 'hakaman' })
+      
+            // Action & Assert
+            await expect(jwtTokenManager.verifyRefreshToken(refreshToken))
+              .resolves
+              .not.toThrow(InvariantError)
+        })
+
+        
+        it('should throw InvariantError when verification access token failed', async () => {
+            // Arrange
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const accessToken = await jwtTokenManager.createRefreshToken({ username: 'hakaman' })
+
+            // Action & Assert
+            await expect(jwtTokenManager.verifyAccessToken(accessToken))
+                .rejects
+                .toThrow(InvariantError)
+
+        })
+
+        it('should not throw InvariantError when access token verified', async () => {
+            // Arrange
+            const jwtTokenManager = new JwtTokenManager(Jwt.token)
+            const refreshToken = await jwtTokenManager.createAccessToken({ username: 'hakaman' })
+      
+            // Action & Assert
+            await expect(jwtTokenManager.verifyAccessToken(refreshToken))
+              .resolves
+              .not.toThrow(InvariantError)
+        })
     })
 
     describe('decodedPayload function', () => {

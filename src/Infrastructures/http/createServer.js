@@ -3,6 +3,7 @@ const users = require('../../Interfaces/http/api/users');
 const DomainErrorTranslator = require('../../Commons/exceptions/DomainErrorTranslator');
 const ClientError = require('../../Commons/exceptions/ClientError');
 const auth = require('../../Interfaces/http/api/auth');
+const threads = require('../../Interfaces/http/api/threads');
  
 const createServer = async (container) => {
   const server = Hapi.server({
@@ -17,6 +18,10 @@ const createServer = async (container) => {
     },
     {
       plugin: auth,
+      options: { container },
+    },
+    {
+      plugin: threads,
       options: { container },
     },
   ]);

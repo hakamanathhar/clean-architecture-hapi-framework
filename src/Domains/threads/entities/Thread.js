@@ -1,38 +1,40 @@
 class Thread {
     constructor(payload) {
-        this._verifyPayload(payload);
+        this._verifyPayload(payload)
     
         const { 
-            content, 
-            images, 
-            createdBy,
-            createdAt, 
-        } = payload;
+            title, 
+            body,
+            owner,
+            username,
+            date
+        } = payload
     
-        this.content = content;
-        this.images = images;
-        this.createdBy = createdBy;
-        this.createdAt = createdAt;
+        this.title = title
+        this.body = body
+        this.owner = owner
+        this.username = username
+        this.date = date
       }
     
       _verifyPayload({ 
-            content, 
-            images, 
-            createdBy,
-            createdAt, 
+          title, 
+          body,
+          owner,
+          username,
       }) {
-        if (!content || !images || !createdBy || !createdAt) {
-          throw new Error('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+        console.log(!title , !body , !owner , !username)
+        if (!title || !body || !owner || !username) {
+          throw new Error('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY')
         }
-    
-        if ( this._checkType(content) || this._checkType(images) 
-            || this._checkType(createdBy) || this._checkType(createdAt)) {
-          throw new Error('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+        
+        if ( this._checkType(title) || this._checkType(body) || this._checkType(owner)) {
+          throw new Error('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION')
         }
       }
 
       _checkType(value, type='string'){
-          return typeof value !== type;
+          return typeof value !== type
       }
 }
 

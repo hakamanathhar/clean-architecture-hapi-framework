@@ -17,6 +17,7 @@ class JwtTokenManager extends AuthTokenManager {
 
     async verifyRefreshToken(token) {
         try {
+            token = token.replace('Bearer ','')
             const artifacts = this._jwt.decode(token)
             this._jwt.verify(artifacts, process.env.REFRESH_TOKEN_KEY)
         } catch (error) {
@@ -24,7 +25,18 @@ class JwtTokenManager extends AuthTokenManager {
         }
     }
 
+    async verifyAccessToken(token) {
+        try {
+            token = token.replace('Bearer ','')
+            const artifacts = this._jwt.decode(token)
+            this._jwt.verify(artifacts, process.env.ACCESS_TOKEN_KEY)
+        } catch (error) {
+            throw new InvariantError('access token tidak valid')
+        }
+    }
+
     async decodePayload(token) {
+        token = token.replace('Bearer ','')
         const artifacts = this._jwt.decode(token)
         return artifacts.decoded.payload
     }

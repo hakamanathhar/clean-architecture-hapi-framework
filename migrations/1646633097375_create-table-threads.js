@@ -5,15 +5,15 @@ exports.up = (pgm) => {
         type: 'VARCHAR(50)',
         primaryKey: true,
       },
-      content: {
+      title: {
+        type: 'TEXT',
+        primaryKey: true,
+      },
+      body: {
         type: 'TEXT',
         notNull: true,
       },
-      images: {
-        type: 'TEXT',
-        notNull: true,
-      },
-      createdBy: {
+      owner: {
         type: 'VARCHAR(50)',
         notNull: true,
         foreignKeys: {
@@ -22,23 +22,13 @@ exports.up = (pgm) => {
             onDelete: 'restrict',
         } 
       },
-      createdAt: {
+      date: {
         type: 'timestamp',
-        notNull: true,
         default: pgm.func('current_timestamp'),
       },
-      updatedBy: {
+      username: {
         type: 'VARCHAR(50)',
         notNull: true,
-        foreignKeys: {
-            columns: 'id',
-            references: 'users'
-        } 
-      },
-      updatedAt: {
-        type: 'timestamp',
-        notNull: true,
-        default: pgm.func('current_timestamp'),
       },
     });
   };

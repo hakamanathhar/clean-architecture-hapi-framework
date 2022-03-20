@@ -8,6 +8,9 @@ class AuthTokenManager {
     async verifyRefreshToken(payload) {
         throw new Error('AUTH_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED')
     }
+    async verifyAccessToken(payload) {
+        throw new Error('AUTH_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED')
+    }
     async decodePayload(payload) {
         throw new Error('AUTH_TOKEN_MANAGER.METHOD_NOT_IMPLEMENTED')
     }
